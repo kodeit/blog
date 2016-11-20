@@ -5,3 +5,4 @@ lib64
 blog/blog/__pycache__/
 blog/posts/__pycache__/
 blog/posts/migrations/__pycache__/
+blog/posts/templatetags/__pycache__/

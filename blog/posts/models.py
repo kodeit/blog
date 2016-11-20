@@ -1,5 +1,9 @@
 from django.conf import settings
 from django.db import models
+from django.dispatch import receiver
+from django.db.models.signals import pre_save
+from django.core.urlresolvers import reverse
+
 
 from posts.utils import *
 
@@ -28,5 +32,14 @@ class Post(models.Model):
     def get_category(self):
         return "\n".join([cat.name for cat in self.category.all()])
 
+    def get_absolute_url(self):
+        return reverse("posts:post-detail", kwargs={"slug": self.slug})
+
     class Meta:
         ordering = ["-created"]
+
+
+@receiver(pre_save, sender=Post)
+def pre_save_post_receiver(sender, instance, *args, **kwargs):
+    if not instance.slug:
+        instance.slug = create_slug(instance)

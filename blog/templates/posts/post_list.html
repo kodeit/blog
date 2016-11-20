@@ -32,6 +32,7 @@
         <h3><a href='{{ obj.get_absolute_url }}'>{{ obj.title }}</a></h3>
         <p>Author: {{ obj.author.username }}</p>
         <p>Summary: {{ obj.summary }}</p>
+        <p><a href="{{ obj.get_absolute_url }}" class="btn btn-primary" role="button">View</a></p>
       </div>
     </div>
   </div>
