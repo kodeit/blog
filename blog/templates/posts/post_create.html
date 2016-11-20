@@ -1,5 +1,9 @@
 {% extends "posts/base.html" %}
 
+{% block head_title %}
+{{ post.title }} {{ block.super }}
+{% endblock head_title %}
+
 {% block content %}
 
 <div class='col-sm-6 col-sm-offset-3'>

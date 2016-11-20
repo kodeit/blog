@@ -1,6 +1,9 @@
 from django.shortcuts import render
+from django.http import Http404
 from django.db.models import Q
-from django.views.generic import ListView, DetailView, CreateView
+from django.urls import reverse_lazy
+from django.views.generic import (
+    ListView, DetailView, CreateView, UpdateView, DeleteView)
 
 from .models import Post
 
@@ -50,6 +53,7 @@ class PostDetailView(DetailView):
 class PostCreateView(CreateView):
     model = Post
 
+    context_object_name = "post"
     fields = ['title', 'summary', 'description', 'image', 'category']
     template_name = 'posts/post_create.html'
 
@@ -61,3 +65,37 @@ class PostCreateView(CreateView):
         context = super(PostCreateView, self).get_context_data(**kwargs)
         context['view_type'] = "New Post"
         return context
+
+
+class PostUpdateView(UpdateView):
+    model = Post
+
+    context_object_name = "post"
+    template_name = 'posts/post_create.html'
+    fields = ['title', 'summary', 'description',
+              'image', 'category']
+
+    def get_object(self, *args, **kwargs):
+        obj = super(PostUpdateView, self).get_object(*args, **kwargs)
+        if not obj.author == self.request.user:
+            raise Http404
+        return obj
+
+    def get_context_data(self, **kwargs):
+        context = super(PostUpdateView, self).get_context_data(**kwargs)
+        context['view_type'] = "Edit Post"
+        return context
+
+
+class PostDeleteView(DeleteView):
+    model = Post
+
+    context_object_name = "post"
+    template_name = 'posts/post_delete.html'
+    success_url = reverse_lazy('posts:post-list')
+
+    def get_object(self, *args, **kwargs):
+        obj = super(PostDeleteView, self).get_object(*args, **kwargs)
+        if not obj.author == self.request.user:
+            raise Http404
+        return obj
