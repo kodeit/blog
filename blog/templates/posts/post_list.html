@@ -1,5 +1,12 @@
 {% extends "posts/base.html" %}
 
+{% block post_list_links %}
+{% if request.user.is_authenticated %}
+    <li class=''><a href='{% url "posts:post-create" %}'>Create</a></li>
+{% endif %}
+{% endblock %}
+
+
 {% block content %}
 <div class='col-sm-6 col-sm-offset-3'>
 <h1>{{ title }}</h1>
