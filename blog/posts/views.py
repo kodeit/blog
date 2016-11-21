@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import Http404
 from django.db.models import Q
 from django.urls import reverse_lazy
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import (
     ListView, DetailView, CreateView, UpdateView, DeleteView)
 
@@ -50,9 +51,10 @@ class PostDetailView(DetailView):
         return self.render_to_response(context)
 
 
-class PostCreateView(CreateView):
+class PostCreateView(LoginRequiredMixin, CreateView):
     model = Post
 
+    login_url = reverse_lazy('accounts:login')
     context_object_name = "post"
     fields = ['title', 'summary', 'description', 'image', 'category']
     template_name = 'posts/post_create.html'
@@ -67,9 +69,10 @@ class PostCreateView(CreateView):
         return context
 
 
-class PostUpdateView(UpdateView):
+class PostUpdateView(LoginRequiredMixin, UpdateView):
     model = Post
 
+    login_url = reverse_lazy('accounts:login')
     context_object_name = "post"
     template_name = 'posts/post_create.html'
     fields = ['title', 'summary', 'description',
@@ -87,9 +90,10 @@ class PostUpdateView(UpdateView):
         return context
 
 
-class PostDeleteView(DeleteView):
+class PostDeleteView(LoginRequiredMixin, DeleteView):
     model = Post
 
+    login_url = reverse_lazy('accounts:login')
     context_object_name = "post"
     template_name = 'posts/post_delete.html'
     success_url = reverse_lazy('posts:post-list')
