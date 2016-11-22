@@ -65,7 +65,7 @@ class PostCreateView(LoginRequiredMixin, CreateView):
 
     def get_context_data(self, **kwargs):
         context = super(PostCreateView, self).get_context_data(**kwargs)
-        context['view_type'] = "New Post"
+        context['view_type'] = 'Create Post'
         return context
 
 
@@ -86,7 +86,7 @@ class PostUpdateView(LoginRequiredMixin, UpdateView):
 
     def get_context_data(self, **kwargs):
         context = super(PostUpdateView, self).get_context_data(**kwargs)
-        context['view_type'] = "Edit Post"
+        context['view_type'] = 'Update Post'
         return context
 
 
