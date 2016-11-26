@@ -6,3 +6,5 @@ blog/blog/__pycache__/
 blog/posts/__pycache__/
 blog/posts/migrations/__pycache__/
 blog/posts/templatetags/__pycache__/
+blog/accounts/__pycache__/
+blog/accounts/migrations/__pycache__/
