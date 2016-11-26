@@ -1,4 +1,9 @@
 {% extends "posts/base.html" %}
+{% load staticfiles %}
+
+{% block local_scripts %}
+<script type="text/javascript" src={% static "js/post_list.js" %} ></script>
+{% endblock %}
 
 {% block post_list_links %}
 {% if request.user.is_authenticated %}
