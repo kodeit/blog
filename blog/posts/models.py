@@ -28,7 +28,7 @@ class Post(models.Model):
     slug = models.SlugField(max_length=40, unique=True)
     image = models.ImageField(upload_to=upload_location,
                               null=True, blank=True,)
-    category = models.ManyToManyField(Category)
+    category = models.ManyToManyField(Category, blank=True)
     comments = GenericRelation(Comment)
 
     def get_category(self):
