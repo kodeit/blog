@@ -1,0 +1,19 @@
+{% load static comments_tag %}
+<div>
+    <div class="row">
+        <div class="col-sm-8">
+            <h5>Comments </h5>
+        </div>
+    </div>
+
+    <div class="comments">
+        {% for comment in comments %}
+           <div id="comment-div-{{ comment.id }}" >
+               {% include "comments/comment.html" with object=comment %}
+           </div>
+           {% empty %}
+           <h5 id='no-comments'> No Comments </h5>
+        {% endfor %}
+    </div>
+</div>
+

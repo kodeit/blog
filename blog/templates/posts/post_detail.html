@@ -1,4 +1,5 @@
 {% extends "posts/base.html" %}
+{% load comments_tag %}
 
 {% block head_title %}
 {{ post.title }} {{ block.super }}
@@ -12,15 +13,17 @@
 {% endblock %}
 
 {% block content %}
+
 <div class='col-sm-6 col-sm-offset-3'>
     {% if post.image %}
-    <img src='{{ object.image.url }}' class='img-responsive' />
+        <img src='{{ object.image.url }}' class='img-responsive' />
     {% endif %}
 
-	<p>Description: {{ post.description }}</p>
-	<p>Summary: {{ post.summary }}</p>
-	<p>Author: {{ post.author.username }}</p>
-	<p>Category: <br/>{% for category in post.category.all %}{{ category }}<br/>{% endfor %}
-
+    <p>Summary: {{ post.summary }}</p>
+    <p>Author: {{ post.author.username }}</p>
+    <p>Category: {% for category in post.category.all %} {{ category }} {% endfor %}
+    <p>Description: {{ post.description }}</p>
+    {% get_comments post request.user %}
 </div>
+
 {% endblock content %}

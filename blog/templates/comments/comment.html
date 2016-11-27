@@ -1,0 +1,18 @@
+<div class=="col-sm-5" >
+    <div class="panel panel-default">
+        <div class="panel-heading">
+
+            {% if object.user %}
+                <span class="text-muted">By: {{ object.user.username }}</span>
+            {% else %}
+                <span class="text-muted">By: Anonymous </span>
+            {% endif %}
+                <span class="text-muted">{{ object.created }}</span>
+        </div>
+
+        <div id='comment-{{ object.id }}' class="panel-body">
+            {{ object.comment }}
+        </div>
+
+    </div>
+</div>
