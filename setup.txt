@@ -1,0 +1,20 @@
+1)  $mkdir test; cd test
+2)  $git clone https://github.com/kodeit/blog.git
+3)  $virtualenv -p python3 . 
+4)  $source bin/activate
+5)  $pip install -r requirements.txt
+
+6)  $cd blog/blog
+
+7)  $python manage.py makemigrations 
+8)  $python manage.py migrate
+9)  $python manage.py createsuperuser
+
+10) $python manage.py collectstatic (Optional, To serve static files from cdn)
+
+11) $python manage.py runserver
+
+12) http://127.0.0.1:8000/admin
+
+13) http://127.0.0.1:8000/
+ 
