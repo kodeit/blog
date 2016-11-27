@@ -6,9 +6,9 @@ from .models import Category, Post
 @admin.register(Post)
 class PostAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ("title",)}
-    list_display = ["title", "created", "get_category"]
+    list_display = ["id", "title", "created", "get_category"]
 
 
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
-    list_display = ["name", "description"]
+    list_display = ["id", "name", "description"]

@@ -3,8 +3,9 @@ from django.db import models
 from django.dispatch import receiver
 from django.db.models.signals import pre_save
 from django.core.urlresolvers import reverse
+from django.contrib.contenttypes.fields import GenericRelation
 
-
+from comments.models import Comment
 from posts.utils import *
 
 
@@ -28,6 +29,7 @@ class Post(models.Model):
     image = models.ImageField(upload_to=upload_location,
                               null=True, blank=True,)
     category = models.ManyToManyField(Category)
+    comments = GenericRelation(Comment)
 
     def get_category(self):
         return "\n".join([cat.name for cat in self.category.all()])
