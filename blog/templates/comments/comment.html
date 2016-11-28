@@ -7,7 +7,15 @@
             {% else %}
                 <span class="text-muted">By: Anonymous </span>
             {% endif %}
-                <span class="text-muted">{{ object.created }}</span>
+            <span class="text-muted">{{ object.created }}</span>
+            {% if object.user %}
+            {% if object.user.id == user.id %}
+                <form class="cmt_del-frm" method='DELETE' action="{% url "comments:comment-delete" object.pk %}">
+                {% csrf_token %}
+                <input type="submit" value="Delete" class="cmt_del_bnt btn-primary" data-id="{{ object.id }}"/>
+                </form>
+            {% endif %}
+            {% endif %}
         </div>
 
         <div id='comment-{{ object.id }}' class="panel-body">
