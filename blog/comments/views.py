@@ -1,3 +1,11 @@
 from django.shortcuts import render
+from django.views.generic import (CreateView, DeleteView)
 
-# Create your views here.
+
+class CommentCreateView(CreateView):
+
+    pass
+
+class CommentDeleteView(DeleteView):
+
+    pass
