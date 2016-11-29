@@ -35,27 +35,27 @@ $(document).ready(function() {
     $('.cmt_del_bnt').click(function(e) {
         e.preventDefault();
         var id = $(this).attr('data-id');
- 
+
         if(confirm("Are you sure you want to delete this comment?")){
-              $.ajax({
-              type: "POST",
-              url: $('.cmt_del-frm').attr('action'),
-              data: {'id': id, },
-              success: function(data){
+            $.ajax({
+                type: "POST",
+                url: $('.cmt_del-frm').attr('action'),
+                data: {'id': id, },
+                success: function(data) {
                     if(data['success'] == 1) {
-                          $('#comment-div-' + id).remove()
-                          if (data['count'] == 0) {
-                                $('#no-comments').show()
-                          }
-                          else {
-                                $('#no-comments').hide()
-                          }
+                        $('#comment-div-' + id).remove()
+                        if (data['count'] == 0) {
+                            $('#no-comments').show()
+                        }
+                        else {
+                            $('#no-comments').hide()
+                        }
                     }
                     else {
-                          alert("You don't have permission to delete this comment");
+                        alert("You don't have permission to delete this comment");
                     }
-              }
-          });
+               }
+           });
         }
     });
 
