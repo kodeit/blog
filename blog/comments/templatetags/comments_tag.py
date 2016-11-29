@@ -35,7 +35,6 @@ register.inclusion_tag('comments/comments.html')(get_comments)
 
 def comment_form(object, user):
 
-     print("\n\ncommet_form :", object.id)
      return {"form": CommentForm(),
             "target": object,
             "user": user

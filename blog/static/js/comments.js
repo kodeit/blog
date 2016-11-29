@@ -33,13 +33,12 @@ $(document).ready(function() {
     /* Reference: Django Ajax docs */
 
     $('.cmt_del_bnt').click(function(e) {
-        e.preventDefault();
         var id = $(this).attr('data-id');
 
         if(confirm("Are you sure you want to delete this comment?")){
             $.ajax({
                 type: "POST",
-                url: $('.cmt_del-frm').attr('action'),
+                url: "/comments/delete/"+id,
                 data: {'id': id, },
                 success: function(data) {
                     if(data['success'] == 1) {
@@ -65,7 +64,6 @@ $(document).ready(function() {
         e.preventDefault();
         var form = $(this);
         var data =  new FormData(form.get(0));
-        alert($('.cmt-add-frm').attr('action'));
         $.ajax({
             url: "/comments/create/",
             type: "POST",

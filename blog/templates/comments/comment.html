@@ -10,10 +10,7 @@
             <span class="text-muted">{{ object.created }}</span>
             {% if object.user %}
             {% if object.user.id == user.id %}
-                <form class="cmt_del-frm" method='DELETE' action="{% url "comments:comment-delete" object.pk %}">
-                {% csrf_token %}
-                <input type="submit" value="Delete" class="cmt_del_bnt btn-link" data-id="{{ object.id }}"/>
-                </form>
+                <input type="button" value="Delete" class="cmt_del_bnt btn-link" data-id="{{ object.id }}"/>
             {% endif %}
             {% endif %}
         </div>
