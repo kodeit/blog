@@ -31,10 +31,8 @@ $(document).ready(function() {
     });
 
     /* Reference: Django Ajax docs */
-
-    $('.cmt_del_bnt').click(function(e) {
+    $('.comments').on("click", '.cmt_del_bnt', function() {
         var id = $(this).attr('data-id');
-
         if(confirm("Are you sure you want to delete this comment?")){
             $.ajax({
                 type: "POST",
@@ -42,12 +40,12 @@ $(document).ready(function() {
                 data: {'id': id, },
                 success: function(data) {
                     if(data['success'] == 1) {
-                        $('#comment-div-' + id).remove()
+                        $('#comment-div-' + id).remove();
                         if (data['count'] == 0) {
-                            $('#no-comments').show()
+                            $('#no-comments').show();
                         }
                         else {
-                            $('#no-comments').hide()
+                            $('#no-comments').hide();
                         }
                     }
                     else {

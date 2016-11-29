@@ -86,11 +86,14 @@ class CommentDeleteView(DeleteView):
         try:
             id = request.POST['id']
             self.object = Comment.objects.get(id=id)
+
             if (self.object.user.id == request.user.id):
                 self.object.delete()
+                model_obj = self.object.content_object
+                count = model_obj.comments.count()
                 data = {
                         "success": "1",
-                        "count": Comment.objects.count()
+                        "count": count
                        }
             else:
                 data = {"success": "0"}

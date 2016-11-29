@@ -10,13 +10,19 @@
     </div>
 
     <div class="comments">
+        {% if comments_count == 0 %}
+           <div class="panel-heading">
+               <span id='no-comments' class="text-muted">No Comments</span>
+           </div>
+        {% else %}
+           <div class="panel-heading">
+               <span id='no-comments' class="text-muted" style="display:none;">No Comments</span>
+           </div>
+        {% endif %}
+
         {% for comment in comments %}
            <div id="comment-div-{{ comment.id }}" >
                {% include "comments/comment.html" with object=comment %}
-           </div>
-        {% empty %}
-           <div class="panel-heading">
-               <span id='no-comments' class="text-muted">No Comments</span>
            </div>
         {% endfor %}
     </div>
