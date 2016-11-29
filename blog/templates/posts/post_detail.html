@@ -23,6 +23,8 @@
     <p>Author: {{ post.author.username }}</p>
     <p>Category: {% for category in post.category.all %} {{ category }} {% endfor %}
     <p>Description: {{ post.description }}</p>
+
+    {% comment_form post request.user %}
     {% get_comments post request.user %}
 </div>
 

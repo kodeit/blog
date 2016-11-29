@@ -35,7 +35,7 @@ $(document).ready(function() {
     $('.cmt_del_bnt').click(function(e) {
         e.preventDefault();
         var id = $(this).attr('data-id');
-
+ 
         if(confirm("Are you sure you want to delete this comment?")){
               $.ajax({
               type: "POST",
@@ -52,11 +52,50 @@ $(document).ready(function() {
                           }
                     }
                     else {
-                          alert("You don't have permission to delete this comment")
+                          alert("You don't have permission to delete this comment");
                     }
               }
           });
         }
     });
-})
+
+    /* Add new comment */
+
+    $('.cmt_add-frm').submit(function(e){
+        e.preventDefault();
+        var form = $(this);
+        var data =  new FormData(form.get(0));
+        alert($('.cmt-add-frm').attr('action'));
+        $.ajax({
+            url: "/comments/create/",
+            type: "POST",
+            data: data,
+            cache: false,
+            processData: false,
+            contentType: false,
+            success: function(json) {
+                if (json['success'] == 0) {
+                    errors = ""
+                    for (var err in json['error']){
+                        errors += "" + err + ": " + json['error'][err] + "\n"
+                    }
+                    alert(errors)
+                }
+                else {
+                    html = "<div id='comment-div-" +
+			    json['id'] + "'>" +
+                            json['html'] +
+                            "</div>"
+                    $('.comments').append(html);
+                    $('textarea#id_comment').val(" ");
+                    $('#no-comments').hide()
+               }
+            },
+            error: function(response) {
+                alert("error")
+            }
+        });
+    });
+
+})  /* End document ready */
 

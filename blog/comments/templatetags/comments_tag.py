@@ -4,6 +4,17 @@ from comments.forms import CommentForm
 
 register = template.Library()
 
+
+@register.simple_tag(name='get_model_name')
+def get_model_name(object):
+    return type(object).__name__
+
+
+@register.simple_tag(name='get_app_name')
+def get_app_name(object):
+    return type(object)._meta.app_label
+
+
 def get_comments(object, user):
 
     model_object = type(object).objects.get(id=object.id)
@@ -21,3 +32,13 @@ def get_comments(object, user):
 
 register.inclusion_tag('comments/comments.html')(get_comments)
 
+
+def comment_form(object, user):
+
+     print("\n\ncommet_form :", object.id)
+     return {"form": CommentForm(),
+            "target": object,
+            "user": user
+            }
+
+register.inclusion_tag('comments/comment_form.html')(comment_form)
