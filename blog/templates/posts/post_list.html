@@ -28,7 +28,7 @@
         </div>
         <select id="post_sort" name='sort' class="btn btn-default">
            <option value="none">-- Sort --</option>
-           <option value="most_visited"> Most visted</option>
+           <option value="most_visited"> Most visited</option>
            <option value="latest">Latest</option>
        </select>
 </form>
@@ -55,7 +55,7 @@
 <div class="pagination">
     <span class="step-links">
         {% if page_obj.has_previous %}
-            <a href="?{{ page_request_var }}={{ object_list.previous_page_number }}">previous</a>
+            <a href="?{{ page_request_var }}={{ object_list.previous_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">previous</a>
         {% endif %}
 
         <span class="current">
@@ -63,7 +63,8 @@
         </span>
 
         {% if page_obj.has_next %}
-            <a href="?page={{ page_obj.next_page_number }}" >next</a>
+            <a href="?page={{ page_obj.next_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}{% if request.GET.sort %}&sort={{ request.GET.sort }}{% endif %}" >next</a>
+
         {% endif %}
     </span>
 </div>
