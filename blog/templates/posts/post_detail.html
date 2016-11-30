@@ -15,13 +15,15 @@
 {% block content %}
 
 <div class='col-sm-6 col-sm-offset-3'>
+
     {% if post.image %}
         <img src='{{ object.image.url }}' class='img-responsive' />
     {% endif %}
-
+    <h1>{{ post.title }} </h1>
+    <p class='text-muted'>By {{ post.author.username }} | {{ post.created }} </p>
     <p>Summary: {{ post.summary }}</p>
-    <p>Author: {{ post.author.username }}</p>
     <p>Category: {% for category in post.category.all %} {{ category }} {% endfor %}
+
     <p>Description: {{ post.description }}</p>
 
     {% comment_form post request.user %}

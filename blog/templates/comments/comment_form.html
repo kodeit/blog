@@ -1,13 +1,15 @@
 {% load comments_tag %}
 
 {% if user.is_authenticated %}
-    <div id="cmt-input-div">
+    <div id="cmt-input-div" class="well">
     <form method="POST" action="{% url "comments:comment-create" %}" class="cmt_add-frm">
         {% csrf_token %}
         {{ form.errors }}
         {{ form.comment.label }}
         <br>
+        <div class="form-group">
         {{ form.comment }}
+        </div>
         {% if target %}
             <input name="model" value="{% get_model_name target %}" hidden>
             <input name="model_id" value="{{ target.id }}" hidden>
