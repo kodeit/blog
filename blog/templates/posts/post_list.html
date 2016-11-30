@@ -28,8 +28,8 @@
         </div>
         <select id="post_sort" name='sort' class="btn btn-default">
            <option value="none">-- Sort --</option>
-           <option value="most_visited"> Most visited</option>
-           <option value="latest">Latest</option>
+           <option value="most_visited" {% ifequal request.GET.sort "most_visited" %} selected{% endifequal %} > Most visited</option>
+           <option value="latest" {% ifequal request.GET.sort "latest" %} selected{% endifequal %} >Latest</option>
        </select>
 </form>
 

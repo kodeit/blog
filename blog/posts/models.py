@@ -38,7 +38,7 @@ class Post(models.Model):
         return reverse("posts:post-detail", kwargs={"slug": self.slug})
 
     class Meta:
-        ordering = ["-created"]
+        ordering = ["created"]
 
 
 @receiver(pre_save, sender=Post)
