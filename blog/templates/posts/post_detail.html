@@ -23,14 +23,16 @@
     <p class='text-muted'>By {{ post.author.username }} | {{ post.created }} </p>
 
     <div class="thumbnail">
-        <p>Summary: {{ post.summary }}</p>
-        <p>Category: {% for category in post.category.all %} {{ category }} {% endfor %}
+        <div class="caption post-sum-cat">
+            <p>Summary: {{ post.summary }}</p>
+            <p>Category: {% for category in post.category.all %} {{ category }} {% endfor %}
+        </div>
     </div>
 
-    <div class="caption post-detail" >
-       <div class="thumbnail">
-          <p>{{ post.description }}</p>
-       </div>
+    <div class="thumbnail">
+        <div class="caption post-description">
+            <p>{{ post.description }}</p>
+        </div>
     </div>
 
     <!-- comments -->
