@@ -21,11 +21,19 @@
     {% endif %}
     <h1>{{ post.title }} </h1>
     <p class='text-muted'>By {{ post.author.username }} | {{ post.created }} </p>
-    <p>Summary: {{ post.summary }}</p>
-    <p>Category: {% for category in post.category.all %} {{ category }} {% endfor %}
 
-    <p>Description: {{ post.description }}</p>
+    <div class="thumbnail">
+        <p>Summary: {{ post.summary }}</p>
+        <p>Category: {% for category in post.category.all %} {{ category }} {% endfor %}
+    </div>
 
+    <div class="caption post-detail" >
+       <div class="thumbnail">
+          <p>{{ post.description }}</p>
+       </div>
+    </div>
+
+    <!-- comments -->
     {% comment_form post request.user %}
     {% get_comments post request.user %}
 </div>

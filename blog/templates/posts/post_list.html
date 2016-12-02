@@ -37,10 +37,7 @@
 <div id="post_list" class="row">
   <div class="col-sm-12">
     <div class="thumbnail">
-        {% if obj.image %}
-         <img src='{{ obj.image.url }}' class='img-responsive' />
-        {% endif %}
-      <div class="caption post-detail-item">
+      <div class="caption post-list-item">
         <h3><a href='{{ obj.get_absolute_url }}'>{{ obj.title }}</a></h3>
         <p>Author: {{ obj.author.username }}</p>
         <p>Summary: {{ obj.summary }}</p>
