@@ -7,6 +7,7 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^accounts/', include('accounts.urls', namespace="accounts")),
     url(r'^comments/', include('comments.urls', namespace="comments")),
+    url(r'^api/posts/', include('posts.api.urls', namespace="posts-api")),
     url(r'^', include("posts.urls", namespace="posts")),
 ]
 
