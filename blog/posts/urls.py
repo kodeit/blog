@@ -11,5 +11,5 @@ urlpatterns = [
     url(r'^(?P<slug>[\w-]+)/edit/$',
         PostUpdateView.as_view(), name='post-update'),
     url(r'^(?P<slug>[\w-]+)/delete/$',
-        PostDeleteView.as_view(), name='post_delete'),
+        PostDeleteView.as_view(), name='post-delete'),
 ]
