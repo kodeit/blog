@@ -22,8 +22,9 @@ def get_comments(object, user):
     ''' Fetch all comments related to a post
     '''
     comments = model_object.comments.all()
-    print("Hi", comments.count())
-    return {"form": CommentForm(),
+
+    return {
+            "form": CommentForm(),
             "comments": comments,
             "target": object,
             "user": user,
@@ -35,9 +36,10 @@ register.inclusion_tag('comments/comments.html')(get_comments)
 
 def comment_form(object, user):
 
-     return {"form": CommentForm(),
+    return {
+            "form": CommentForm(),
             "target": object,
             "user": user
-            }
+           }
 
 register.inclusion_tag('comments/comment_form.html')(comment_form)
