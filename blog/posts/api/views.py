@@ -1,3 +1,4 @@
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.generics import (
     ListAPIView,
     RetrieveAPIView,
@@ -7,6 +8,7 @@ from rest_framework.generics import (
 )
 
 from posts.models import Post
+from .permissions import IsOwner
 
 from .serializers import (
     PostCreateSerializer,
@@ -18,6 +20,7 @@ from .serializers import (
 class PostCreateAPIView(CreateAPIView):
 
     serializer_class = PostCreateSerializer
+    permission_classes = (IsAuthenticated, )
 
     def perform_create(self, serializer):
         serializer.save(author=self.request.user)
@@ -34,6 +37,7 @@ class PostDestroyAPIView(RetrieveDestroyAPIView):
 
     queryset = Post.objects.all()
     serializer_class = PostCreateSerializer
+    permission_classes = (IsOwner, )
     lookup_field = 'slug'
 
 
@@ -47,6 +51,7 @@ class PostUpdateAPIView(RetrieveUpdateAPIView):
 
     queryset = Post.objects.all()
     serializer_class = PostCreateSerializer
+    permission_classes = (IsOwner, )
     lookup_field = 'slug'
 
     def perform_create(self, serializer):
