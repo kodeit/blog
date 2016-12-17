@@ -1,21 +1,10 @@
-from django.contrib.auth import get_user_model
-
 from rest_framework.serializers import ModelSerializer
 
-from posts.models import Post, Category
+from accounts.api.serializers import UserSerializer
+from comments.api.serializers import CommentSerializer
+
 from comments.models import Comment
-
-User = get_user_model()
-
-
-class CommentSerializer(ModelSerializer):
-
-    class Meta:
-        model = Comment
-        fields = [
-            'user',
-            'comment',
-        ]
+from posts.models import Post, Category
 
 
 class CategorySerializer(ModelSerializer):
@@ -24,15 +13,6 @@ class CategorySerializer(ModelSerializer):
         model = Category
         fields = [
             'name',
-        ]
-
-
-class UserSerializer(ModelSerializer):
-
-    class Meta:
-        model = User
-        fields = [
-            'username',
         ]
 
 

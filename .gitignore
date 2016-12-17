@@ -12,3 +12,5 @@ blog/comments/__pycache__/
 blog/comments/migrations/__pycache__/
 blog/comments/templatetags/__pycache__/
 blog/posts/api/__pycache__/
+blog/comments/api/__pycache__/
+blog/accounts/api/__pycache__/
