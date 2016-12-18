@@ -15,6 +15,15 @@ class CategorySerializer(ModelSerializer):
             'name',
         ]
 
+class CreateCategorySerializer(ModelSerializer):
+
+    class Meta:
+        model = Category
+        fields = [
+            'id',
+            'name',
+            'description',
+        ]
 
 class PostDetailSerializer(ModelSerializer):
 

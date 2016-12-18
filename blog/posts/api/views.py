@@ -11,10 +11,18 @@ from posts.models import Post
 from .permissions import IsOwner
 
 from .serializers import (
+    CreateCategorySerializer,
     PostCreateSerializer,
     PostDetailSerializer,
     PostListSerializer,
 )
+
+
+
+class CategoryCreateAPIView(CreateAPIView):
+
+    serializer_class = CreateCategorySerializer
+    permission_classes = (IsAuthenticated, )
 
 
 class PostCreateAPIView(CreateAPIView):

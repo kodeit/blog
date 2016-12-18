@@ -1,5 +1,11 @@
 {% extends "posts/base.html" %}
+{% load staticfiles %}
 {% load crispy_forms_tags %}
+
+
+{% block local_scripts %}
+    <script type="text/javascript" src={% static "js/category.js" %} ></script>
+{% endblock %}
 
 {% block head_title %}
 {{ post.title }} {{ block.super }}
@@ -12,8 +18,41 @@
 
 <form method='POST' action='' enctype='multipart/form-data'>{% csrf_token %}
 	{{ form|crispy }}
-	<input type='submit' class='btn btn-default' value="{{ view_type }}" />
+	<button type="button" id='mbtn' class="btn btn-primary" data-target=".demo-popup">+</button>
+	<br><br>
+	<input type='submit' class='btn btn-primary' value="{{ view_type }}" />
 </form>
+
+
+<!-- popup box modal starts here -->
+<div class="modal fade demo-popup" id="cat-modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel-1"aria-hidden="true">
+
+<div class="modal-dialog">
+
+<div class="modal-content">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Add Category</h4>
+    </div>
+
+    <form class='addcat' id="cat-form" action='/api/posts/category/create/' enctype='multipart/form-data'>
+       {% csrf_token %}
+       <div class="modal-body">
+         <div id="name-group" class="form-group">
+         <label class="col-sm-6 control-label ">Name</label>
+         <input name="name" id="name" class="form-control" type="text">
+         </div>
+         <div id="description-group" class="form-group">
+         <label class="col-sm-2 control-label ">Description</label>
+         <textarea name="description" id="description"class="form-control"></textarea>
+         </div>
+         <input type="submit" id='mbtn1' class="btn btn-primary" value= "save" />
+       </div>
+    </form>
+
+</div>
+
+</div>
 
 </div>
 {% endblock content %}
