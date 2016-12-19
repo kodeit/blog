@@ -34,64 +34,64 @@ $(document).ready(function() {
     $('.comments').on("click", '.cmt_del_bnt', function() {
         var id = $(this).attr('data-id');
         if(confirm("Are you sure you want to delete this comment?")){
-            $.ajax({
+            var request = $.ajax({
                 type: "POST",
                 url: "/comments/delete/"+id,
                 data: {'id': id, },
-                success: function(data) {
-                    if(data['success'] == 1) {
-                        $('#comment-div-' + id).remove();
-                        if (data['count'] == 0) {
-                            $('#no-comments').show();
-                        }
-                        else {
-                            $('#no-comments').hide();
-                        }
+             });
+            request.done(function(data) {
+                if(data['success'] == 1) {
+                    $('#comment-div-' + id).remove();
+                    if (data['count'] == 0) {
+                        $('#no-comments').show();
+                    } else {
+                        $('#no-comments').hide();
                     }
-                    else {
-                        alert("You don't have permission to delete this comment");
-                    }
-               }
-           });
+                } else {
+                    alert("You don't have permission to delete this comment");
+                }
+            });
+            request.fail(function(jqXHR, status, error) {
+                alert("Failed to delete the comment", status)
+            });
         }
     });
 
     /* Add new comment */
 
-    $('.cmt_add-frm').submit(function(e){
+    $('.cmt_add-frm').submit(function(e) {
         e.preventDefault();
         var form = $(this);
         var data =  new FormData(form.get(0));
-        $.ajax({
+
+        var request = $.ajax({
             url: "/comments/create/",
             type: "POST",
             data: data,
             cache: false,
             processData: false,
             contentType: false,
-            success: function(json) {
-                if (json['success'] == 0) {
-                    errors = ""
-                    for (var err in json['error']){
-                        errors += "" + err + ": " + json['error'][err] + "\n"
-                    }
-                    alert(errors)
+        });
+        request.done(function(json) {
+            if (json['success'] == 0) {
+                errors = ""
+                for (var err in json['error']){
+                    errors += "" + err + ": " + json['error'][err] + "\n"
                 }
-                else {
-                    html = "<div id='comment-div-" +
-			    json['id'] + "'>" +
-                            json['html'] +
-                            "</div>"
-                    $('.comments').append(html);
-                    $('textarea#id_comment').val(" ");
-                    $('#no-comments').hide()
-               }
-            },
-            error: function(response) {
-                alert("error")
+                alert(errors)
+            } else {
+                html = "<div id='comment-div-" +
+                        json['id'] + "'>" +
+                        json['html'] +
+                       "</div>"
+                $('.comments').append(html);
+                $('textarea#id_comment').val(" ");
+                $('#no-comments').hide()
             }
+        });
+        request.fail(function(jqXHR, status, error) {
+           alert("Failed to create the comment", status)
         });
     });
 
 })  /* End document ready */
-
