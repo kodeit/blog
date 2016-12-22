@@ -84,7 +84,7 @@ $(document).ready(function() {
                         json['id'] + "'>" +
                         json['html'] +
                        "</div>"
-                $('.comments').append(html);
+                $('.comments').prepend(html);
                 $('textarea#id_comment').val(" ");
                 $('#no-comments').hide()
             }
