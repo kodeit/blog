@@ -25,7 +25,9 @@
     <div class="thumbnail">
         <div class="caption post-sum-cat">
             <p>Summary: {{ post.summary }}</p>
-            <p>Category: {% for category in post.category.all %} {{ category }} {% endfor %}
+            {% if post.category.all|length %}
+                <p>Category: {{ post.category.all|join:", " }}
+            {% endif %}
         </div>
     </div>
 

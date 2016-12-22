@@ -4,7 +4,7 @@
     <form method="POST" action="{% url "comments:comment-create" %}" class="cmt_add-frm">
         {% csrf_token %}
         {{ form.errors }}
-        {{ form.comment.label }}
+	<h4>Post a Comment</h4>
         <br>
         <div class="form-group">
         {{ form.comment }}
