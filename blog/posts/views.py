@@ -1,15 +1,14 @@
-from django.shortcuts import render
-from django.http import Http404
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Q
+from django.http import Http404
 from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_protect
-from django.contrib.auth.mixins import LoginRequiredMixin
-from django.views.generic import (
-    ListView, DetailView, CreateView, UpdateView, DeleteView)
+from django.views.generic import (CreateView, DeleteView,
+    DetailView, ListView, UpdateView)
 
-from .models import Post
 from blog.cache_utils import BlogCache
+from .models import Post
 
 
 class PostListView(ListView):

@@ -9,7 +9,7 @@ class BlogCache:
 
     def cache_invalidate(self, prefix):
         cache_keys = BlogCache.cache_key_dic[prefix]
-        print(cache_keys)
+
         try:
             cache.delete_many(cache_keys)
         except Exception as e:

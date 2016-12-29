@@ -1,9 +1,9 @@
 from django.conf import settings
-from django.db import models
-from django.dispatch import receiver
-from django.db.models.signals import pre_save, post_save
-from django.core.urlresolvers import reverse
 from django.contrib.contenttypes.fields import GenericRelation
+from django.core.urlresolvers import reverse
+from django.db import models
+from django.db.models.signals import pre_save, post_save
+from django.dispatch import receiver
 
 from blog.cache_utils import BlogCache
 from comments.models import Comment
