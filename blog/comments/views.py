@@ -32,7 +32,7 @@ class AjaxableResponseMixin(object):
                 {'object': self.object,
                  'user': self.request.user,
                  'csrf_token': csrf_token_value,
-                 })
+                })
             try:
                 data = {
                     'success': 1,

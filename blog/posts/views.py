@@ -2,11 +2,14 @@ from django.shortcuts import render
 from django.http import Http404
 from django.db.models import Q
 from django.urls import reverse_lazy
+from django.utils.decorators import method_decorator
+from django.views.decorators.csrf import csrf_protect
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import (
     ListView, DetailView, CreateView, UpdateView, DeleteView)
 
 from .models import Post
+from blog.cache_utils import BlogCache
 
 
 class PostListView(ListView):
@@ -15,6 +18,7 @@ class PostListView(ListView):
     template_name = 'posts/post_list.html'
     context_object_name = "object_list"
     paginate_by = 3
+    cache_obj = BlogCache()
 
     def get_queryset(self):
 
@@ -35,6 +39,11 @@ class PostListView(ListView):
             queryset = queryset.order_by("-created")
 
         return queryset
+
+    @method_decorator(cache_obj.cache_per_user(1000 * 6 0* 2, 'post_list'))
+    @method_decorator(csrf_protect)
+    def get(self, *args, **kwargs):
+        return super(PostListView, self).get(*args, **kwargs)
 
 
 class PostDetailView(DetailView):
