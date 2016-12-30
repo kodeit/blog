@@ -7,17 +7,22 @@ from rest_framework.generics import (
     RetrieveDestroyAPIView
 )
 
-from posts.models import Post
+from posts.models import Category, Post
 from .permissions import IsOwner
 
 from .serializers import (
     CreateCategorySerializer,
+    CategoryListSerializer,
     PostCreateSerializer,
     PostDetailSerializer,
     PostListSerializer,
 )
 
 
+class CategoryListAPIView(ListAPIView):
+
+    queryset = Category.objects.all()
+    serializer_class = CategoryListSerializer
 
 class CategoryCreateAPIView(CreateAPIView):
 

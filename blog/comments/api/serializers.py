@@ -1,6 +1,6 @@
 from django.contrib.contenttypes.models import ContentType
 
-from rest_framework.serializers import ModelSerializer
+from rest_framework.serializers import ModelSerializer, IntegerField
 
 from accounts.api.serializers import UserSerializer
 from comments.models import Comment
@@ -19,6 +19,7 @@ class CommentSerializer(ModelSerializer):
 def create_comment_serializer(app_name, model, user):
     class CommentCreateSerializer(ModelSerializer):
 
+        object_id = IntegerField(required=True)
         class Meta:
             model = Comment
             fields = [

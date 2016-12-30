@@ -23,8 +23,9 @@ class UserCreateSerializer(ModelSerializer):
         }
 
     def create(self, validated_data):
-        username = validated_data['username']
-        password = validated_data['password']
+
+        username = validated_data.get('username', None)
+        password = validated_data.get('password', None)
         user_obj = User(username = username)
         user_obj.set_password(password)
         user_obj.save()
@@ -32,7 +33,7 @@ class UserCreateSerializer(ModelSerializer):
 
     def validate_username(self, value):
         data = self.get_initial()
-        username = data['username']
+        username = data.get('username', None)
         user_qs = User.objects.filter(username=username)
         if user_qs.exists():
             raise ValidationError("This user has already registered.")
@@ -40,8 +41,8 @@ class UserCreateSerializer(ModelSerializer):
 
     def validate_password(self, value):
         data = self.get_initial()
-        password = data['password']
-        password2 = data['password2']
+        password = data.get('password', None)
+        password2 = data.get('password2', None)
         if password != password2:
             raise ValidationError("Password doesn't match.")
         return value

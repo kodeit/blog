@@ -7,6 +7,15 @@ from comments.models import Comment
 from posts.models import Post, Category
 
 
+class CategoryListSerializer(ModelSerializer):
+
+    class Meta:
+        model = Category
+        fields = [
+            'id',
+            'name',
+        ]
+
 class CategorySerializer(ModelSerializer):
 
     class Meta:
