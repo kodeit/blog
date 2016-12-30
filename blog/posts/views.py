@@ -39,7 +39,7 @@ class PostListView(ListView):
 
         return queryset
 
-    @method_decorator(cache_obj.cache_per_user(1000 * 6 0* 2, 'post_list'))
+    @method_decorator(cache_obj.cache_per_user(1000 * 60 * 2, 'post_list'))
     @method_decorator(csrf_protect)
     def get(self, *args, **kwargs):
         return super(PostListView, self).get(*args, **kwargs)

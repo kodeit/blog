@@ -1,8 +1,9 @@
-from django.contrib.contenttypes.models import ContentType
+from rest_framework.generics import CreateAPIView, DestroyAPIView
 
-from rest_framework.generics import CreateAPIView
+from comments.models import Comment
+from posts.api.permissions import IsOwner
+from .serializers import create_comment_serializer, CommentDestroySerializer
 
-from .serializers import create_comment_serializer
 
 
 class PostCommentCreateAPIView(CreateAPIView):
@@ -16,3 +17,11 @@ class PostCommentCreateAPIView(CreateAPIView):
                 )
 
         return serializer_class
+
+
+class PostCommentDestroyAPIView(DestroyAPIView):
+
+    queryset = Comment.objects.all()
+    serializer_class = CommentDestroySerializer
+    permission_classes = (IsOwner,)
+    lookup_field = 'pk'

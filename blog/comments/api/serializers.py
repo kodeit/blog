@@ -59,3 +59,10 @@ def create_comment_serializer(app_name, model, user):
             return instance
 
     return CommentCreateSerializer
+
+
+class CommentDestroySerializer(ModelSerializer):
+
+    class Meta:
+        model = Comment
+
