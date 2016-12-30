@@ -1,4 +1,5 @@
 from rest_framework.permissions import IsAuthenticated
+from rest_framework.filters import SearchFilter, OrderingFilter
 from rest_framework.generics import (
     ListAPIView,
     RetrieveAPIView,
@@ -58,6 +59,9 @@ class PostListAPIView(ListAPIView):
 
     queryset = Post.objects.all()
     serializer_class = PostListSerializer
+    filter_backends = (SearchFilter, OrderingFilter,)
+    search_fields = ('description', 'summary', 'title')
+    ordering_fields = ('visit_count', 'created')
 
 
 class PostUpdateAPIView(RetrieveUpdateAPIView):
